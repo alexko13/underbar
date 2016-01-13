@@ -79,7 +79,7 @@
   _.filter = function(collection, test) {
     var result = [];
       _.each(collection, function(e,i,arr){
-        test(e, i, arr) && ( result.push(e) );
+        test(e, i, arr) && (result.push(e));
       });
     return result;
   };
@@ -89,15 +89,15 @@
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
     return _.filter(collection, function(e,i,arr){
-      return !(test(e,i,arr))
-    })
+      return !(test(e,i,arr));
+    });
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
     var result = [];
     _.each(array, function(e,i,arr){
-      _.indexOf(result, e)===-1 && ( result.push(e) );  
+      (_.indexOf(result, e) === -1) && ( result.push(e) );  
     })
     return result;
   };
@@ -246,7 +246,7 @@
     var args = Array.prototype.slice.call(arguments, 1);
     _.each(args, function(e,i,arr){
       _.each(e, function(v, k, coll){
-        !(k in obj) && ( obj[k] = v )
+        !(k in obj) && ( obj[k] = v );
       });
     });
     return obj;
@@ -356,6 +356,10 @@
   // Calls the method named by functionOrKey on each value in the list.
   // Note: You will need to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
+    return _.map(collection, function(e,i,arr){
+      var func = typeof functionOrKey==='string' ?  e[functionOrKey] : functionOrKey;
+      return func.apply(e, args);
+    });
   };
 
   // Sort the object's values by a criterion produced by an iterator.
@@ -363,6 +367,13 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+    //make copy of colletion
+
+    //iterate collection (copy) 
+        // w/iterator to e
+
+
+
   };
 
   // Zip together two or more arrays with elements of the same index
